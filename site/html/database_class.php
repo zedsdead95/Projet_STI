@@ -24,18 +24,18 @@ class MyDB extends SQLite3
    	 	while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
       	  	// creates new user
 			
-			$user = new User($row['Id'],$row["Username"],$row['Password'],$row['Role'],$row['isActive']);
+			$user = new User($row["Username"],$row['Id'],$row['Password'],$row['Role'],$row['IsActive']);
 		}
     } 
 
     function checkIfUsernameExist(){
-        $sql ='SELECT * from Accounts where username="'.$_POST["usr_name"].'";';
+        $sql ='SELECT * from Accounts where Username="'.$_POST["username"].'";';
          $ret = $db->query($sql);
 
          while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
              // creates new user
          
-         $user = new User($row['ID'],$row["USERNAME"],$row['PASSWORD'],$row['role'],$row['accountIsActive']);
+         $user = new User($row["Username"],$row['Id'],$row['Password'],$row['role'],$row['IsActive']);
      }
  } 
    //echo "Operation done successfully\n";
