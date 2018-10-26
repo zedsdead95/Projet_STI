@@ -1,5 +1,8 @@
 /**
 * Source : https://github.com/BestsoftCorporation/PHP-SQLITE-registration-login-form/blob/master/login.php
+*
+* Here we do the validation of username and password entered by the user
+*
 **/
 <?php
 	
@@ -8,7 +11,7 @@ session_start();
 
 if (isset($_POST['username'])){
     if (empty($_POST['username']) || empty($_POST['password'])) {
-        $error = "Username or Password missing";
+        $error = "Missing username or password";
     }
     else {
 
