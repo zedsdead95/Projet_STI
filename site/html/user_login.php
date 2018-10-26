@@ -1,42 +1,35 @@
-/**
-* Source : https://github.com/BestsoftCorporation/PHP-SQLITE-registration-login-form/blob/master/login.php
-*
-* Here we do the validation of username and password entered by the user
-*
-**/
-<?php
-	
-include_once('opendDB.php');
+<?php 
+		$db = new PDO('sqlite:/usr/share/nginx/databases/database.sqlite');
+          if (isset($_POST["username"]) && isset($_POST["password"]) ) {
+            $req = $db->prepare('
+              SELECT *
+              FROM user
+              WHERE username = :username AND password = :password
+            ');
+            $req->execute( array(
+              'username' => $_POST['username'],
+              'password' => $_POST['password']
 
-session_start();
+            ));
 
-if (isset($_POST['username'])){
-    if (empty($_POST['username']) || empty($_POST['password'])) {
-        $error = "Missing username or password";
-    }
-    else {
+            $result = $req->fetch();
 
-        $user = $db->getUser($_POST['username']);
+            echo $result['isActive'];
 
-        if ($user != null){
-
-            if ($user->isActivate()){
-                $password = $_POST['password'];
-
-                if ($db->validePassword($_POST['username'], $_POST['password'])){
-                    $_SESSION['login']=$_POST['username'];
-                    $_SESSION['user']=$user;
-                    header('Location: /mail.php');
-                }else{
-                    $error = "Wrong Password";
-                }
-            } else {
-                $error = "Account inactive";
+            if(empty($result)) {
+              header('Location: nothello.php');
             }
-        }else{
-            $error = "Account does not exist, please register to access to your account !";
-        }
-    }
-}
-	
-?>
+            elseif($result['isActive'] == 0) {
+              echo('<span class="errors">Your account has been suspended</span>');
+            }
+            else
+            {
+              $_SESSION['id'] = $result['id'];
+              $_SESSION['user'] = $result['username'];
+              $_SESSION['password'] = $result['password'];
+              $_SESSION['state'] = $result['isActive'];
+              $_SESSION['role'] = $result['role'];
+              header('Location: view_mail.php');
+            }
+          }
+        ?>
