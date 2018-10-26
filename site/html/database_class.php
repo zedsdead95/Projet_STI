@@ -18,10 +18,10 @@ class MyDB extends SQLite3
    
    
    function getUser(){
-   		$sql ='SELECT * from Accounts where Username="'.$_POST["username"].'";';
-   	 	$ret = $db->query($sql);
+   		$sqlrqst ='SELECT * FROM Accounts WHERE Username="'.$_POST["username"].'";';
+   	 	$result = $db->query($sqlrqst);
    
-   	 	while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
+   	 	while($row = $result->fetchArray(SQLITE3_ASSOC) ){
       	  	// creates new user
 			
 			$user = new User($row["Username"],$row['Id'],$row['Password'],$row['Role'],$row['IsActive']);
@@ -29,11 +29,19 @@ class MyDB extends SQLite3
     } 
 
     function checkIfUsernameExist(){
-        $sql ='SELECT * from Accounts where Username="'.$_POST["username"].'";';
-         $ret = $db->query($sql);
+        $sqlrqst ='SELECT * FROM Accounts WHERE Username="'.$_POST["username"].'";';
+         $result = $db->query($sqlrqst);
 
-         while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
-             // creates new user
+         while($row = $result->fetchArray(SQLITE3_ASSOC) ){
+         
+         $user = new User($row["Username"],$row['Id'],$row['Password'],$row['role'],$row['IsActive']);
+     }
+
+     function getUsernameFromId($id){
+        $sqlrqst ="SELECT * FROM Accounts WHERE Id ='$id'";
+         $result = $db->query($sqlrqst);
+
+         while($row = $result->fetchArray(SQLITE3_ASSOC) ){
          
          $user = new User($row["Username"],$row['Id'],$row['Password'],$row['role'],$row['IsActive']);
      }

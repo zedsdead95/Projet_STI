@@ -3,7 +3,7 @@
 <?php
 
 
-$db = new MyDB(); // create varaible database
+$db = new MyDB(); // create variable database
 if(!$db){
    echo $db->lastErrorMsg();
 } else {

@@ -6,7 +6,8 @@
 **/
 <?php
 	
-		
+include_once('opendDB.php');
+
 session_start();
 
 if (isset($_POST['username'])){
@@ -20,7 +21,7 @@ if (isset($_POST['username'])){
         if ($user != null){
 
             if ($user->isActivate()){
-                $pwd = $_POST['password'];
+                $password = $_POST['password'];
 
                 if ($db->validePassword($_POST['username'], $_POST['password'])){
                     $_SESSION['login']=$_POST['username'];
@@ -33,7 +34,7 @@ if (isset($_POST['username'])){
                 $error = "Account inactive";
             }
         }else{
-            $error = "User not exists, please register to continue!";
+            $error = "Account does not exist, please register to access to your account !";
         }
     }
 }

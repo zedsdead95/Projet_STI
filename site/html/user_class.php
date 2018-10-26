@@ -8,8 +8,8 @@ class User {
     public $id;
     public $isActive;
 
-    public function __construct($username,$role,$id,$isActive){
-        $this->$sername =$username;
+    public function __construct($username,$id,$password,$role,$isActive){
+        $this->$username =$username;
         $this.$role =$role;
         $this.$id = $id;
         this.$isActive = $isActive ;
