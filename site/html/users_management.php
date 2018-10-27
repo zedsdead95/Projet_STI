@@ -38,7 +38,7 @@
                         <tr>
                         <td><?php echo $row['username']; ?></td>
                         <td><?php echo $row['isActive']; ?></td>
-						<td><?php echo $row['role']; ?></td>
+						            <td><?php echo $row['role']; ?></td>
                         <td><a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
                         <td><a href="delete_user.php?id=<?php echo $row['id']; ?>">Delete</a></td>
                         </tr>

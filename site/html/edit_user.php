@@ -1,3 +1,4 @@
+ 
 <?php session_start(); ?>
 <?php
 
@@ -6,19 +7,38 @@ $file_db = new PDO('sqlite:/usr/share/nginx/databases/database.sqlite');
   // Set errormode to exceptions
   $file_db->setAttribute(PDO::ATTR_ERRMODE, 
                           PDO::ERRMODE_EXCEPTION);
+  if (isset($_GET['id']) ) {
 
+      $req = $file_db->prepare('
+          SELECT *
+          FROM user
+          WHERE id = :id
+      ');
+
+      $req->execute( array(
+          'id' => $_GET['id']
+      ));
+
+      $data = $req->fetch();
+
+      $username = $data['username'];
+      $password = $data['password'];
+      $isActive = $data['isActive'];
+      $role = $data['role'];
+    }
 if (!empty($_POST)){
 
     $req = $file_db->prepare('
-        INSERT INTO user (username,password,isActive,role)
-        VALUES (:username, :password, :isActive, :role)
+        UPDATE user
+        SET password = :password, isActive = :isActive, role = :role
+        WHERE username = :username
     ');
 
     $req->execute( array(
-        'username' => $_POST['username'],
         'password' => $_POST['password'],
         'isActive' => $_POST['isActive'],
-        'role' => $_POST['role']
+        'role' => $_POST['role'],
+        'username' => $_POST['username']
     ));
     header('Location: users_management.php');
   }
@@ -35,25 +55,32 @@ if (!empty($_POST)){
             <div class="row">
                 <div class="col-md-10">
                     <div class="white-box">
-                        <form method="post" action="add_user.php" class="form-horizontal form-material">
+                        <form method="post" action="edit_user.php" class="form-horizontal form-material">
                             <div class="form-group">
                                 <label for="to" class="col-md-10">Username</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="username" placeholder="Username" class="form-control form-control-line" required>
+                                    <input type="text" name="username" <?php if(isset($_GET['id'])) { echo "value=" . $username; } ?> placeholder="Username" class="form-control form-control-line" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-10">Password</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="password" placeholder="Password" class="form-control form-control-line" required> 
+                                    <input type="text" name="password"  <?php if(isset($_GET['id'])) { echo "value=" . $password; } ?> placeholder="Password" class="form-control form-control-line" required> 
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-10">Active</label>
                                 <div class="col-md-2">
                                     <select name="isActive" class="form-control form-control-line">
-                                        <option selected value="1">Active</option>
-                                        <option value="0">Not active</option>
+                                    	<?php if(isset($_GET['id'])) {
+                                    		if($isActive == 0) {
+                                    			echo ("<option value=\"1\">Active</option>");
+                                    			echo ("<option selected value=\"0\">Not active</option>");
+                                    		} else {
+                                    			echo ("<option selected value=\"1\">Active</option>");
+                                    			echo ("<option value=\"0\">Not active</option>");
+                                    		}
+                                    	} ?>
                                     </select>
                                 </div>
                             </div>
@@ -61,15 +88,22 @@ if (!empty($_POST)){
                                 <label class="col-md-10">Role</label>
                                 <div class="col-md-2">
                                     <select name="role" class="form-control form-control-line">
-                                        <option selected value="0">Collaborater</option>
-                                        <option value="1">Administrator</option>
+                                        <?php if(isset($_GET['id'])) {
+                                        	if($role == 0) {
+                                        		echo ("<option value=\"1\">Collaborater</option>");
+                                        		echo ("<option selected value=\"0\">Administrator</option>");
+                                        	} else {
+                                        		echo ("<option selected value=\"1\">Collaborater</option>");
+                                        		echo ("<option value=\"0\">Administrator</option>");
+                                        	}
+                                        } ?>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <input type="submit" value="Add user" class="btn btn-success" />
+                                    <input type="submit" value="Edit user" class="btn btn-success" />
                                 </div>
                             </div>
                         </form>
