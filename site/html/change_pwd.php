@@ -1,5 +1,7 @@
 <?php session_start(); 
 
+include 'security_check.php';
+
 if (!empty($_POST)){
 
   $file_db = new PDO('sqlite:/usr/share/nginx/databases/database.sqlite');
@@ -61,23 +63,6 @@ if (!empty($_POST)){
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-
-    <!-- Demo scripts for this page-->
-    <script src="js/demo/datatables-demo.js"></script>
 
   </body>
 

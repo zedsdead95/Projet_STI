@@ -1,7 +1,7 @@
- 
-<?php session_start(); ?>
+ <?php session_start(); ?>
+<?php include 'security_check.php'; ?>
+<?php include 'admin_check.php'; ?>
 <?php
-
 
 $file_db = new PDO('sqlite:/usr/share/nginx/databases/database.sqlite');
   // Set errormode to exceptions
@@ -90,11 +90,11 @@ if (!empty($_POST)){
                                     <select name="role" class="form-control form-control-line">
                                         <?php if(isset($_GET['id'])) {
                                         	if($role == 0) {
-                                        		echo ("<option value=\"1\">Collaborater</option>");
-                                        		echo ("<option selected value=\"0\">Administrator</option>");
+                                        		echo ("<option selected value=\"0\">Collaborater</option>");
+                                        		echo ("<option value=\"1\">Administrator</option>");
                                         	} else {
-                                        		echo ("<option selected value=\"1\">Collaborater</option>");
-                                        		echo ("<option value=\"0\">Administrator</option>");
+                                        		echo ("<option value=\"0\">Collaborater</option>");
+                                        		echo ("<option selected value=\"1\">Administrator</option>");
                                         	}
                                         } ?>
                                     </select>
@@ -128,23 +128,6 @@ if (!empty($_POST)){
 
     </div>
     <!-- /#wrapper -->
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-
-    <!-- Demo scripts for this page-->
-    <script src="js/demo/datatables-demo.js"></script>
 
   </body>
 

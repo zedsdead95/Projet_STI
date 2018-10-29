@@ -1,4 +1,6 @@
- <?php session_start(); ?>
+<?php session_start(); ?>
+<?php include 'security_check.php'; ?>
+<?php include 'admin_check.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include 'menu.php'; ?>
@@ -11,7 +13,7 @@
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-table"></i>
-              Mailbox</div>
+              Users management</div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -34,11 +36,24 @@
                         $result =  $file_db->query($sql);
  
                       foreach($result as $row) {
+
+                      	if($row['isActive'] == 0) {
+                      		$isActive = 'Not active';
+                      	} else {
+                      		$isActive = 'Active';
+                      	}
+
+                      	if($row['role'] == 0) {
+                      		$role = 'Collaborater';
+                      	} else {
+                      		$role = 'Administrator';
+                      	}
+
                         ?>
                         <tr>
                         <td><?php echo $row['username']; ?></td>
-                        <td><?php echo $row['isActive']; ?></td>
-						            <td><?php echo $row['role']; ?></td>
+                        <td><?php echo $isActive ?></td>
+						<td><?php echo $role ?></td>
                         <td><a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
                         <td><a href="delete_user.php?id=<?php echo $row['id']; ?>">Delete</a></td>
                         </tr>

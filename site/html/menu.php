@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Tables</title>
+    <title>STI Mailbox</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="index.html">Mail application</a>
+      <a class="navbar-brand mr-1" href="list_mail.php">Mail application</a>
 
     </nav>
 
@@ -36,12 +36,12 @@
       <ul class="sidebar navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="new_mail.php">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-fw fa-table"></i>
             <span>New message</span>
           </a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="tables.php">
+        <li class="nav-item">
+          <a class="nav-link" href="list_mail.php">
             <i class="fas fa-fw fa-table"></i>
             <span>Messages</span></a>
         </li>

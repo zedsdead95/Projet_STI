@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php include 'security_check.php'; ?>
 
 <?php
 if (isset($_GET['id']) ) {
@@ -42,16 +43,16 @@ if (isset($_GET['id']) ) {
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Received date : <?php echo date("d M Y - G:i", $data['received_date']); ?> </th>
+                      <th><strong>Received date :</strong> <?php echo date("d M Y - G:i", $data['received_date']); ?> </th>
                     </tr>
                     <tr>
-                      <th>From : <?php echo $data['source'];?> </th>
+                      <td><strong>From :</strong> <?php echo $data['source'];?> </td>
                     </tr>
                    	<tr>
-                      <th>Subject: <?php echo $data['subject']; ?></th>
+                      <td><strong>Subject:</strong> <?php echo $data['subject']; ?></th>
                     </tr>
                     <tr>
-                      <th>Message : <br><?php echo $data['body']; ?> </th>
+                      <td><?php echo $data['body']; ?> </td>
                     </tr>
                     <tr>
 						<th>
@@ -83,24 +84,6 @@ if (isset($_GET['id']) ) {
 
     </div>
     <!-- /#wrapper -->
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-
-    <!-- Demo scripts for this page-->
-    <script src="js/demo/datatables-demo.js"></script>
 
   </body>
 

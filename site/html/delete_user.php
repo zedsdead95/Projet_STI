@@ -1,5 +1,7 @@
 <?php
     session_start();
+    include 'security_check.php';
+    include 'admin_check.php';
     $file_db = new PDO('sqlite:/usr/share/nginx/databases/database.sqlite');
     // Set errormode to exceptions
     $file_db->setAttribute(PDO::ATTR_ERRMODE, 

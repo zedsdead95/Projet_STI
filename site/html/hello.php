@@ -1,4 +1,0 @@
-ok
-<?php 
-	echo "walidation...";
-?> 

@@ -25,7 +25,7 @@
        $_SESSION['password'] = $result['password'];
        $_SESSION['state'] = $result['isActive'];
        $_SESSION['role'] = $result['role'];
-       header('Location: tables.php');
+       header('Location: list_mail.php');
      }
    }
 ?>

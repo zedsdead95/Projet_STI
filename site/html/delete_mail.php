@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include 'security_check.php';
     $file_db = new PDO('sqlite:/usr/share/nginx/databases/database.sqlite');
     // Set errormode to exceptions
     $file_db->setAttribute(PDO::ATTR_ERRMODE, 
@@ -16,6 +17,6 @@
             'user' => $_SESSION['username']
         ));
     }
-    header("Location: tables.php");
+    header("Location: list_mail.php");
     exit();
 ?> 
